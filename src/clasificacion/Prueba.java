@@ -46,6 +46,6 @@ public class Prueba {
         aux = new Nodo("Miau", "Gato");
         a.agregarHijoEnRecorrido(recorrido, aux);
 
-        System.out.println(a.getAnimal(an));
+        System.out.println(a.imprimir());
     }
 }

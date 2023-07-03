@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Arbol {
     private Nodo raiz;
-
     public Arbol() {
         this.raiz = null;
     }
@@ -18,7 +17,6 @@ public class Arbol {
         this.raiz = raiz;
         return true;
     }
-
     public String getAnimal(Animal buscado){
         Nodo aux = raiz;
         while (aux.getHijos().size() > 0){
@@ -35,7 +33,6 @@ public class Arbol {
         }
         return aux != null ?  aux.getPregunta() : "No registrado un animal con esas características";
     }
-
     public Nodo getNodoRecorrido(ArrayList<Object> recorrido){
         Nodo aux = raiz;
         for(Object o: recorrido){
@@ -45,9 +42,21 @@ public class Arbol {
         }
         return aux;
     }
-
     public boolean agregarHijoEnRecorrido(ArrayList<Object> recorrido, Nodo hijo){
         Nodo aux = getNodoRecorrido(recorrido);
         return aux != null? aux.agregarHijo(hijo):false;
+    }
+    public String imprimir(){
+        return imprimir(raiz, 0);
+    }
+    private String imprimir(Nodo actual, int profundidad){
+        if (actual.getHijos().isEmpty()){
+            return "\t".repeat(profundidad) + actual.getRespuesta() + ":" + actual.getPregunta() + "\n";
+        }
+        String resultado = "\t".repeat(profundidad) + actual.getRespuesta() + ":" + actual.getPregunta() + "\n";
+        for (Nodo hijo: actual.getHijos()){
+            resultado += imprimir(hijo, profundidad + 1);
+        }
+        return resultado;
     }
 }
